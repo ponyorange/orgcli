@@ -1,0 +1,21 @@
+{
+  "name": "orgcli",
+  "version": "0.1.0",
+  "description": "cli tool for orange",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["cli"],
+  "author": "",
+  "license": "MIT",
+  "bin": {
+    "hi": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
+    "commander": "^9.4.0",
+    "figlet": "^1.5.2"
+  }
+}
