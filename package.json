@@ -1,14 +1,22 @@
 {
-  "name": "orgcli",
+  "name": "orgtool-cli",
   "version": "0.1.0",
-  "description": "cli tool for orange",
+  "description": "cli tool from orange",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "cli"
+    "cli",
+    "tool",
+    "translate"
   ],
+  "homepage": "https://orange.seeyouweb.com/orgcli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ponyorange/orgcli"
+  },
   "author": "ponyorange",
   "license": "MIT",
   "bin": {
