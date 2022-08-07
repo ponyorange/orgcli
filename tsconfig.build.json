@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "esnext",
-    "target": "es5",
-    "declaration": true,
-    "jsx": "react",
+    "module": "CommonJS",
+    "target": "es6",
     "moduleResolution":"node",
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "include": [
     "src"

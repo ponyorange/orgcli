@@ -9,7 +9,7 @@ npm i orgtool-cli -g
 
 ### 命令集：
 * orgcli
-```js
+```
 工具集介绍和帮助
 ```
 * youdao
@@ -32,3 +32,79 @@ npm i orgtool-cli -g
 
 无需打开翻译软件，直接编辑器命令行走一波即可，优雅，实在太优雅了
 ```
+* orgcli t2t
+```
+快速时间戳相互转换
+使用：youdao [时间/时间戳]
+如：orgcli t2t 1670814671000
+┌────────────────────┬─────┬─────────────────────┐
+│ 1670814671000 (ms) │ --> │ 2022-12-12 11:11:11 │
+└────────────────────┴─────┴─────────────────────┘
+如：orgcli t2t 1670814671
+┌────────────────┬─────┬─────────────────────┐
+│ 1670814671 (s) │ --> │ 2022-12-12 11:11:11 │
+└────────────────┴─────┴─────────────────────┘
+如：orgcli t2t 2022-12-12 11:11
+┌─────────────────────┬─────┬────────────┬───┬────┬───────────────┬────┐
+│ 2022-12-12 11:11:00 │ --> │ 1670814660 │ s │ -- │ 1670814660000 │ ms │
+└─────────────────────┴─────┴────────────┴───┴────┴───────────────┴────┘
+如：orgcli t2t 2022-12-12 11:11:11
+┌─────────────────────┬─────┬────────────┬───┬────┬───────────────┬────┐
+│ 2022-12-12 11:11:11 │ --> │ 1670814671 │ s │ -- │ 1670814671000 │ ms │
+└─────────────────────┴─────┴────────────┴───┴────┴───────────────┴────┘
+```
+* orgcli cssvar
+```
+用于将css文件中某个值转换为变量
+使用：orgcli cssvar [css目标文件路径]
+
+why？
+有这么一个开发场景，你用scss开发，而又想用css变量实现主题的替换。（css变量可以在运行时改变主题）
+我们都知道， Less 提供 modifyVars 的方式，在编译期完成 Less 变量的替换，而不能在运行时替换。
+而scss却没有这种方式，如果你用scss开发组件库或者项目，想要达到主题个变化，就需要利用css变量。css变量的优势是可以在运行时替换也可以在编译时替换。
+
+所以这个命令是帮你把scss编译完成后的css文件中的变量，转换为css变量，这样就可以使用css变量更换主题。
+你只需简单的配置，将sccs变量映射为css变量即可。
+在项目根目录下新建文件orgcli-cssvar.config.js，配置如下：
+```
+```js
+// orgcli-cssvar.config.js
+module.exports = {
+  cssvar:`
+:root {
+    --org-color-primary:       #f0ad4e; //解释：在scss中定义了变量$primary:  #f0ad4e !default; 映射为css变量--org-color-primary  如下同理
+    --org-color-secondary:     #6c757d;
+    --org-color-success:       #5cb85c;
+    --org-color-info:          #5bc0de;
+    --org-color-warning:       #fadb14;
+    --org-color-danger:        #d9534f;
+    --org-color-light:         #f8f9fa;
+    --org-color-dark:          #343a40;
+    --org-color-primary-darken:#df8a13;
+    --org-primary-opacity01:   rgba(240, 173, 78, 0.1);
+    --org-primary-opacity02:   rgba(240, 173, 78, 0.2);
+    --org-primary-opacity03:   rgba(240, 173, 78, 0.3);
+    --org-primary-opacity04:   rgba(240, 173, 78, 0.4);
+    --org-primary-opacity05:   rgba(240, 173, 78, 0.5);
+}
+  `
+}
+```
+```
+配置完后，执行命令：orgcli cssvar ./index.css，即可将index.css文件中的scss变量转换为css变量，
+然后可以用:root:root{
+    --org-color-primary:       #123456; //新颜色
+}
+的方式来更换主题。
+甚至可以在运行时利用js来更换主题，例如：
+```
+```js
+// 获取根节点
+  let body = document.body
+  // 循环给根节点的 CSS 变量赋值
+  Object.keys(themeMap).forEach(key => {
+    // 这里使用-- 作为前缀名, 是为了区分变量名
+    body.style.setProperty("--org-color-primary", "#654321")
+  })
+```
+### Ok, have fun ! 
