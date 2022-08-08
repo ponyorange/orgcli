@@ -1,12 +1,12 @@
 {
   "name": "orgtool-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "cli tool from orange",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf -G ./dist"
   },
   "keywords": [
     "cli",

@@ -11,7 +11,7 @@ function timeTransform(timeStr: number | string): number | string {
         }
     } else if (/^(\d{4})-(\d{1,2})-(\d{1,2})$/.test(timeStr)) {
         if (verifyDate(timeStr)) {
-            const d = new Date(timeStr)
+            const d = new Date(timeStr + " 00:00:00")
             return d.getTime();
         } else {
             return -1;
